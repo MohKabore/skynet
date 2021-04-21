@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LT6gjikpgWotuFvcmumOcQDcqAPyWiGCCs4VFRl9SmQ1b0p4gepPDeQ3i9Se8GOBCToP+iq21dk40j27D0BCmQ==",
+  "dgSpecHash": "rYcVAy7aIH5Q1gNbYYGHDAhSVsuwwkQoWMaohhhvIxajGISllMwbzGC5OK1w7olx/hjdccflBHWkRLgrr/2DoQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\MOHAMED\\Documents\\Demo\\Demo\\skinet\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -80,6 +80,7 @@
     "C:\\Users\\MOHAMED\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\MOHAMED\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\MOHAMED\\.nuget\\packages\\stackexchange.redis\\2.0.601\\stackexchange.redis.2.0.601.nupkg.sha512",
+    "C:\\Users\\MOHAMED\\.nuget\\packages\\stripe.net\\39.45.0\\stripe.net.39.45.0.nupkg.sha512",
     "C:\\Users\\MOHAMED\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\MOHAMED\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\MOHAMED\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
