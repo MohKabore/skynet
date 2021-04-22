@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IBrand } from '../shared/models/brand';
 import { IProduct } from '../shared/models/product';
-import { IProductType } from '../shared/models/productType';
+import { IType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
 import { ShopService } from './shop.service';
 
@@ -14,9 +14,9 @@ export class ShopComponent implements OnInit {
 
   @ViewChild('search', {static:false}) searchTerm : ElementRef;
   products: IProduct[];
-  types: IProductType[];
+  types: IType[];
   brands: IBrand[];
- shopParams  =new ShopParams();
+ shopParams  :ShopParams;
  totalCount : number;
   sortOptions = [
     {name :'Alphabetic', value : 'name'},
@@ -25,19 +25,19 @@ export class ShopComponent implements OnInit {
 
 
   ];
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService) {
+    this.shopParams = this.shopService.getShopParams();
+   }
 
   ngOnInit() {
-  this.getProducts();
+  this.getProducts(true);
   this.getBrands();
   this.getTypes();
   }
 
-  getProducts() {
-    this.shopService.getProducts(this.shopParams).subscribe(response => {
+  getProducts(useCache=false) {
+    this.shopService.getProducts(useCache).subscribe(response => {
       this.products = response.data;
-      this.shopParams.pageNumber = response.pageIndex;
-      this.shopParams.pageSize = response.pageSize;
       this.totalCount = response.count;
     }, error => {
       console.log(error);
@@ -62,37 +62,49 @@ export class ShopComponent implements OnInit {
   }
 
   onBrandSelected(brindId: number) {
-    this.shopParams.brandId = brindId;
-    this.shopParams.pageNumber =1;
+    const params = this.shopService.getShopParams();
+    params.brandId = brindId;
+    params.pageNumber =1;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
 
   onTypeSelected(tpyeId: number) {
-    this.shopParams.typeId = tpyeId;
-    this.shopParams.pageNumber =1;
+    const params = this.shopService.getShopParams();
+    params.typeId = tpyeId;
+    params.pageNumber =1;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
 
   onSortSelected(sort: string) {
+    const params = this.shopService.getShopParams();
     this.shopParams.sort = sort;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
+
   onPageChanged(event: number) {
-  if(this.shopParams.pageNumber!==event) {
-    this.shopParams.pageNumber = event;
-    this.getProducts();
+    const params = this.shopService.getShopParams();
+  if(params.pageNumber!==event) {
+    params.pageNumber = event;
+    this.shopService.setShopParams(params);
+    this.getProducts(true);
   }
   }
 
   onSearch() {
-    this.shopParams.search = this.searchTerm.nativeElement.value;
-    this.shopParams.pageNumber =1;
+    const params = this.shopService.getShopParams();
+    params.search = this.searchTerm.nativeElement.value;
+    params.pageNumber =1;
+    this.shopService.setShopParams(params);
     this.getProducts();
   }
 
   onReset() {
     this.searchTerm.nativeElement.value = '';
-    this.shopParams = new ShopParams();
+    this.shopParams= new ShopParams();
+    this.shopService.setShopParams(this.shopParams);
     this.getProducts();
   }
 }
